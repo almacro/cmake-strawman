@@ -1,14 +1,12 @@
-#define BOOST_TEST_MODULE SqrTests
-#include <boost/test/unit_test.hpp>
-
 #include "sqr.h"
+#include "gtest/gtest.h"
 
-BOOST_AUTO_TEST_CASE(FailTest)
+TEST(sqr_test, FailTest)
 {
-  BOOST_CHECK_EQUAL(5, sqr(2))
+  EXPECT_EQ(5, sqr(2));
 }
 
-BOOST_AUTO_TEST_CASE(PassTest)
+TEST(sqr_test, PassTest)
 {
-  BOOST_CHECK_EQUAL(4, sqr(2))
+  EXPECT_EQ(4, sqr(2));
 }
