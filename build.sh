@@ -6,12 +6,12 @@ _do_build() {
     mkdir ./build/
   fi
   cd ./build/; cmake -G "Unix Makefiles" ..; make; cd - 1>build.log
-
 }
 
 _do_test() {
   _do_build
   cd ./build/; make test; cd - 1>build.log
+  ./build/test/Test
 }
 
 _do_clean() {
