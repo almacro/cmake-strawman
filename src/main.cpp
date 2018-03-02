@@ -1,5 +1,5 @@
 // A simple program that computes the square of a number
-#include <stdio,h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "sqr.h"
 int main(int argc, char *argv[])
