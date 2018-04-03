@@ -14,10 +14,10 @@ bash build.sh build
 
 To test the project, building from source as needed use
 ```
-bash build.sh build
+bash build.sh test
 ```
 
 To cleanup build and generated files use
 ```
-bash build.sh build
+bash build.sh clean
 ```
