@@ -1,20 +1,27 @@
-cmake_minimum_required (VERSION 3.2)
+cmake_minimum_required (VERSION 2.8.9 FATAL_ERROR)
 
-project (TEST)
+project (omp_demo)
 
-include(CTest)
+set (CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
+set (EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
-include(DownloadProject.cmake)
-download_project(PROJ              googletest
-                 GIT_REPOSITORY    https://github.com/google/googletest.git
-                 GIT_TAG           master
-                 ${UPDATED_DISCONNECTED_IF_AVAILABLE}
-)
+include(FindOpenMP)
+if(OPENMP_FOUND)
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 
-add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+  if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+    message("*** HAVE Intel compiler")
+  else()
+    message("*** HAVE NON-Intel compiler")
+  endif()
+else()
+    message("*** ERROR cannot config OpenMP")
+endif()
 
-add_subdirectory (src)
+#find_library(omp)
 
-enable_testing()
-add_subdirectory (test)
+file (GLOB SOURCES "src/*.cpp")
 
+add_executable (omp_hello ${SOURCES})
